@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         val filename = "data.txt"
+        var i=0
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,7 +36,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this@MainActivity, RecordActivity::class.java))
         }
         save.setOnClickListener {
-            val text = inputTrash1.text.toString()
+            i++
+            val text = i.toString()+"."+inputTrash1.text.toString()+"\n"
             when {
                 TextUtils.isEmpty(text) -> {
                     Toast.makeText(applicationContext, "입력한게 없습니다...", Toast.LENGTH_LONG).show()
@@ -43,14 +46,22 @@ class MainActivity : AppCompatActivity() {
                     saveToInnerStorage(text, filename)
                 }
             }
+
+        }
+        delete.setOnClickListener {
+            deleteToInnerStorage(filename)
         }
     }
 
     fun saveToInnerStorage(text: String,filename: String){
-        val fileOutputStream = openFileOutput(filename, Context.MODE_PRIVATE)
-
+        val fileOutputStream = openFileOutput(filename, Context.MODE_APPEND)
         fileOutputStream.write(text.toByteArray())
-
+        fileOutputStream.close()
+    }
+    fun deleteToInnerStorage(filename: String){
+        val text=""
+        val fileOutputStream=openFileOutput(filename, Context.MODE_PRIVATE)
+        fileOutputStream.write(text.toByteArray())
         fileOutputStream.close()
     }
 }

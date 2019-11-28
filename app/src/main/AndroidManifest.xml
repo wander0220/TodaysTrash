@@ -18,11 +18,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".RecordActivity">
-        </activity>
+        <activity android:name=".RecordActivity"></activity>
+        <activity android:name=".monthlyRecordActivity"></activity>
 
-        <activity android:name=".monthlyRecordActivity">
-        </activity>
+        <service android:name=".LockScreenService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
     </application>
 
 </manifest>

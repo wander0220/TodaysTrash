@@ -23,11 +23,10 @@ class RecordActivity : Activity() {
         gotoMonthly.setOnClickListener {
             startActivity(Intent(this@RecordActivity, monthlyRecordActivity::class.java))
         }
-
         try {
             loadText.setText(loadFromInnerStorage(filename="data.txt"))
         }catch (e: FileNotFoundException){
-            Toast.makeText(applicationContext,"저장된 쓰레기가 없습니다",Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext,"저장된 쓰레기가 없습니다.",Toast.LENGTH_LONG).show()
         }
     }
     fun loadFromInnerStorage(filename:String): String{

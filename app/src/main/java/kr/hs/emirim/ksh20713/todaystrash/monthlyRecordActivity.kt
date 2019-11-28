@@ -25,7 +25,5 @@ class monthlyRecordActivity : AppCompatActivity(){
 
         dateNow = findViewById(R.id.textView_date) as TextView
         dateNow.setText(formatDate)
-
-
     }
 }
